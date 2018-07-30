@@ -9,6 +9,12 @@ public class Application {
 		Scanner sc = new Scanner(System.in);
 		CCourant CourantGreg = new CCourant();
 		
+		CCourant DummyAccount = new CCourant();
+		DummyAccount.setID(239324);
+		DummyAccount.setNom("Jean-Joseph");
+		DummyAccount.setPrenom("Christian");
+		DummyAccount.setSolde(100);
+		
 		while(running) {
 		//Espace de connexion
 		System.out.println("Bienvenue chez SimplonCoin");
@@ -37,6 +43,14 @@ public class Application {
 		if(actions == 1) {
 			System.out.println("Vos comptes ont actuellement : " + CourantGreg.getSolde());
 		} else if(actions == 2) {
+			System.out.println("Quelle somme souhaitez vous retirer ?");
+			
+			double amount = sc.nextDouble();
+			double newsold = CourantGreg.getSolde() - amount ;
+			System.out.println("Vous avez retirer :" + amount + "euros.");
+			System.out.println("Il vous reste : " + CourantGreg.getSolde() + "euros.");
+			
+			
 			
 		} else if(actions == 3) {
 			

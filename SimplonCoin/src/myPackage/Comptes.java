@@ -4,7 +4,7 @@ public class Comptes {
 	public int ID = 0;
 	public String nom;
 	public String prenom;
-	public double solde;
+	public double solde = 500.00;
 	public int getID() {
 		return ID;
 	}
