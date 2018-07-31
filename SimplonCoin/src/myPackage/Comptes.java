@@ -1,10 +1,16 @@
 package myPackage;
 
 public class Comptes {
+	
+	//Les différentes propriétées de la classe parent
 	public int ID = 0;
 	public String nom;
 	public String prenom;
 	public double solde ;
+	
+	
+	
+	//Et ses getters et setters.
 	public int getID() {
 		return ID;
 	}
