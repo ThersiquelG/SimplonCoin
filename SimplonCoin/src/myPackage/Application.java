@@ -1,7 +1,7 @@
 package myPackage;
 import java.util.Scanner;
 
-//ScÃ©nario d'utilisation d'une appli bancaire avec 500 euros d'avoir disponible
+//Scénario d'utilisation d'une appli bancaire avec 500 euros d'avoir disponible.
 
 public class Application {
 
@@ -10,18 +10,20 @@ public class Application {
 		boolean running = true;
 		Scanner sc = new Scanner(System.in);
 		CCourant CourantGreg = new CCourant();
+		CourantGreg.setSolde(1000);
 
 		CCourant DummyAccount = new CCourant();
 		DummyAccount.setID(239324);
 		DummyAccount.setNom("Jean-Joseph");
 		DummyAccount.setPrenom("Christian");
 		DummyAccount.setSolde(100);
-		
-		
+
+
 		System.out.println("Bienvenue chez SimplonCoin");
-		System.out.println("Veuillez taper vos identifiants(nom/prÃ©nom) pour vous connecter.");
+		System.out.println("Veuillez votre nom.");
 		String nom = sc.next();
 		CourantGreg.setNom(nom);
+		System.out.println("Veuillez votre prénom.");
 		String prenom = sc.next();
 		CourantGreg.setPrenom(prenom);
 
@@ -29,12 +31,13 @@ public class Application {
 
 		while(running) {
 			//Espace de connexion
-			
+
 			//
 			
 			
-			//Choix des opÃ©rations
-			System.out.println("Quelle(s) opÃ©ration(s) voulez-vous effectuer ?");
+			//Choix des opérations
+			System.out.println("Quelle(s) opération(s) voulez-vous effectuer ?");
+			System.out.println("Veuillez-taper le numéro de l'opération désirée.");
 			System.out.println("Consulter mes soldes - 1");
 			System.out.println("***");
 
@@ -47,25 +50,33 @@ public class Application {
 			System.out.println("Se deconnecter - 4");
 			System.out.println("***");
 			int actions = sc.nextInt();
-			
-			
+
+
 			//Consultation du solde
 			if(actions == 1) {
-				System.out.println("Vos comptes ont actuellement : " + CourantGreg.getSolde());
-				
-				
+				System.out.println("----------------------------");
+				System.out.println("Vos comptes ont actuellement : " + CourantGreg.getSolde() + " euros.");
+				System.out.println("----------------------------");
+
 				//Retrait d'argent
 			} else if(actions == 2) {
 				System.out.println("Quelle somme souhaitez vous retirer ?");
 
 				double amount = sc.nextDouble();
 				double newsold = CourantGreg.getSolde() - amount ;
-				System.out.println("Vous avez retirer :" + amount + "euros.");
-				System.out.println("Il vous reste : " + newsold + "euros.");
-				running = true;
-				if(amount > CourantGreg.getSolde()) {
+				CourantGreg.setSolde(newsold);
+				CourantGreg.getSolde();
+				if(CourantGreg.getSolde() < 0) {
 					System.out.println("Vous n'avez pas assez d'argent.");
+				} else {
+					System.out.println("Vous avez retirer :" + amount + "euros.");
+					System.out.println("----------------------------");
+					System.out.println("Il vous reste : " + newsold + "euros.");
+					System.out.println("----------------------------");
+					running = true;
 				}
+				
+				
 
 
 				//Versement
@@ -76,18 +87,24 @@ public class Application {
 				if(x == 1) {
 					System.out.println("Quelle somme souhaitez vous envoyer vers ce compte ?");
 					double versAmount = sc.nextInt();
+					
 					if(versAmount > CourantGreg.getSolde()) {
 						System.out.println("Vous n'avez pas assez d'argent.");
 					} else {
-						System.out.println("Vous avez envoyer : " + versAmount + " au compte numÃ©ro" + DummyAccount.getNom() + "  " + DummyAccount.getPrenom() + "  :" + " ID de compte " + DummyAccount.getID());
-						System.out.println("Il vous reste :"  + (CourantGreg.getSolde() - versAmount) + "euros");
+						CourantGreg.setSolde(CourantGreg.getSolde() - versAmount);
+						CourantGreg.getSolde();
+						System.out.println("Vous avez envoyer : " + versAmount + " au compte numéro" + DummyAccount.getNom() + "  " + DummyAccount.getPrenom() + "  :" + " ID de compte " + DummyAccount.getID());
+						System.out.println("----------------------------");
+						System.out.println("Il vous reste :"  + (CourantGreg.getSolde()) + "euros");
+						System.out.println("----------------------------");
 						double dummySold = versAmount + DummyAccount.getSolde();
+						System.out.println("**************************");
 						System.out.println("Votre ami a maintenant :" + (DummyAccount.getSolde() + versAmount) + " euros.");
+						System.out.println("**************************");
 					}
-
 				}
-				
-				
+
+
 				//Log out
 			} else if(actions == 4) {
 				running = false;
