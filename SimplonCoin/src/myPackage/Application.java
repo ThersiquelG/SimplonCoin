@@ -19,7 +19,7 @@ public class Application {
 		CourantGreg.setSolde(1000);
 		
 		
-		//Création d'une deuxième instance de la classe enfant "DummyAccount", héritant des propriétées de la classe parent "Comptes"
+		//Création d'une deuxième instance de la classe enfant "CCourant", héritant des propriétées de la classe parent "Comptes"
 		CCourant DummyAccount = new CCourant();
 		DummyAccount.setID(239324);
 		DummyAccount.setNom("Jean-Joseph");
