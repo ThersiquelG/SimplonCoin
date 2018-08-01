@@ -1,7 +1,7 @@
 package myPackage;
 import java.util.Scanner;
 
-//Scénario d'utilisation d'une appli bancaire avec 500 euros d'avoir disponible.
+//Scénario d'utilisation d'une appli bancaire avec 1000 euros d'avoir disponible.
 
 public class Application {
 
@@ -20,7 +20,7 @@ public class Application {
 		
 		
 		//Création d'une deuxième instance de la classe enfant "CCourant", héritant des propriétées de la classe parent "Comptes"
-		CCourant DummyAccount = new CCourant();
+		PEL DummyAccount = new PEL();
 		DummyAccount.setID(239324);
 		DummyAccount.setNom("Jean-Joseph");
 		DummyAccount.setPrenom("Christian");
@@ -72,26 +72,9 @@ public class Application {
 				//création d'une variable de type double pour indiquer un montant de retrait
 				double amount = sc.nextDouble();
 				
-				//Opération de retrait qui va attribuer une nouvelle valeur avec .setSolde de la classe CourantGreg
-				double newsold = CourantGreg.getSolde() - amount ;
-				CourantGreg.setSolde(newsold);
-				CourantGreg.getSolde();
-				//---
-				
-				//vérification du solde pour pouvoir effectuer l'opération
-				if(CourantGreg.getSolde() < 0) {
-					System.out.println("Vous n'avez pas assez d'argent.");
-				} else {
-					System.out.println("Vous avez retirer :" + amount + "euros.");
-					System.out.println("----------------------------");
-					System.out.println("Il vous reste : " + newsold + "euros.");
-					System.out.println("----------------------------");
-					running = true;
-				}
+				CourantGreg.retrait(CourantGreg, amount);
 				
 				
-
-
 				//Versement
 			} else if(actions == 3) {
 				
@@ -107,23 +90,7 @@ public class Application {
 					//création d'une variable de type double pour indiquer le montant de versement désiré
 					double versAmount = sc.nextInt();
 					
-					//vérification du solde pour pouvoir effectuer l'opération
-					if(versAmount > CourantGreg.getSolde()) {
-						System.out.println("Vous n'avez pas assez d'argent.");
-					} else {
-						
-						//Opération de versement qui va attribuer une nouvelle valeur avec .setSolde de la classe CourantGreg
-						CourantGreg.setSolde(CourantGreg.getSolde() - versAmount);
-						CourantGreg.getSolde();
-						System.out.println("Vous avez envoyer : " + versAmount + " au compte numéro" + DummyAccount.getNom() + "  " + DummyAccount.getPrenom() + "  :" + " ID de compte " + DummyAccount.getID());
-						System.out.println("----------------------------");
-						System.out.println("Il vous reste :"  + (CourantGreg.getSolde()) + "euros");
-						System.out.println("----------------------------");
-						double dummySold = versAmount + DummyAccount.getSolde();
-						System.out.println("**************************");
-						System.out.println("Votre ami a maintenant :" + (DummyAccount.getSolde() + versAmount) + " euros.");
-						System.out.println("**************************");
-					}
+					CourantGreg.versement(DummyAccount, versAmount);
 				}
 
 
